@@ -40,5 +40,4 @@ class _SplashScreenState extends State<SplashScreen> {
 
 Widget splashScreenIcon() {
   String iconPath = "assets/icons/EVENTORM_W.png";
-  return AssetImage("assets/icons/EVENTORM_W.png");
 }
