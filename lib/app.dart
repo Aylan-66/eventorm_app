@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/splash_screen.dart';
-import 'package:grocery_app/styles/theme.dart';
+import 'package:eventorm_app/screens/splash_screen.dart';
+import 'package:eventorm_app/styles/theme.dart';
 
 class MyApp extends StatelessWidget {
   @override

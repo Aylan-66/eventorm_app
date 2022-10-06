@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/styles/colors.dart';
+import 'package:eventorm_app/styles/colors.dart';
 
 String gilroyFontFamily = "Gilroy";
 

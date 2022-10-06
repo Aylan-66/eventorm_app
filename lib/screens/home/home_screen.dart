@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/grocery_item.dart';
-import 'package:grocery_app/screens/product_details/product_details_screen.dart';
-import 'package:grocery_app/styles/colors.dart';
+import 'package:eventorm_app/models/grocery_item.dart';
+import 'package:eventorm_app/screens/product_details/product_details_screen.dart';
+import 'package:eventorm_app/styles/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:grocery_app/widgets/grocery_item_card_widget.dart';
-import 'package:grocery_app/widgets/search_bar_widget.dart';
+import 'package:eventorm_app/widgets/grocery_item_card_widget.dart';
+import 'package:eventorm_app/widgets/search_bar_widget.dart';
 
 import 'grocery_featured_Item_widget.dart';
 import 'home_banner_widget.dart';

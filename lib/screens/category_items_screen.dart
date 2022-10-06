@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:grocery_app/common_widgets/app_text.dart';
-import 'package:grocery_app/models/grocery_item.dart';
-import 'package:grocery_app/screens/product_details/product_details_screen.dart';
-import 'package:grocery_app/widgets/grocery_item_card_widget.dart';
+import 'package:eventorm_app/common_widgets/app_text.dart';
+import 'package:eventorm_app/models/grocery_item.dart';
+import 'package:eventorm_app/screens/product_details/product_details_screen.dart';
+import 'package:eventorm_app/widgets/grocery_item_card_widget.dart';
 
 import 'filter_screen.dart';
 
