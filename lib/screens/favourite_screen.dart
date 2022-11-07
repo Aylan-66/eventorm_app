@@ -6,10 +6,12 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: AppText(
-          text: "No Favorite Items",
-          fontWeight: FontWeight.w600,
-          color: Color(0xFF7C7C7C),
+        child: Text(
+          "No Favorite Items",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF7C7C7C),
+          ),
         ),
       ),
     );

@@ -38,6 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-Widget splashScreenIcon() {
+Widget? splashScreenIcon() {
   String iconPath = "assets/icons/EVENTORM_W.png";
 }

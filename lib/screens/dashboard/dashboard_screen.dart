@@ -59,13 +59,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   BottomNavigationBarItem getNavigationBarItem(
-      {String label, String iconPath, int index}) {
+      {String? label, String? iconPath, int? index}) {
     Color iconColor =
         index == currentIndex ? AppColors.primaryColor : Colors.black;
     return BottomNavigationBarItem(
       label: label,
       icon: SvgPicture.asset(
-        iconPath,
+        iconPath!,
         color: iconColor,
       ),
     );

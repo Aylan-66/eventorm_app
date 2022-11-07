@@ -50,38 +50,40 @@ class CategoryItemsScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: 25,
           ),
-          child: AppText(
-            text: "Beverages",
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+          child: Text(
+            "Beverages",
+            style: TextStyle(fontWeight: FontWeight.bold,
+              fontSize: 20,),
           ),
         ),
       ),
-      body: StaggeredGridView.count(
+      body: StaggeredGrid.count(
         crossAxisCount: 4,
         // I only need two card horizontally
         children: beverages.asMap().entries.map<Widget>((e) {
           GroceryItem groceryItem = e.value;
           return GestureDetector(
             onTap: () {
-              onItemClicked(context, groceryItem);
+              /*onItemClicked(context, groceryItem);*/
+              print("miteux");
             },
             child: Container(
               padding: EdgeInsets.all(10),
-              child: GroceryItemCardWidget(
+              child: /*GroceryItemCardWidget(
                 item: groceryItem,
                 heroSuffix: "explore_screen",
-              ),
+              ),*/
+              Text("await"),
             ),
           );
         }).toList(),
-        staggeredTiles:
-            beverages.map<StaggeredTile>((_) => StaggeredTile.fit(2)).toList(),
+        /*staggeredTiles:
+            beverages.map<StaggeredTile>((_) => StaggeredTile.fit(2)).toList(),*/
         mainAxisSpacing: 3.0,
         crossAxisSpacing: 0.0, // add some space
       ),
     );
-  }
+  }/*
 
   void onItemClicked(BuildContext context, GroceryItem groceryItem) {
     Navigator.push(
@@ -93,5 +95,5 @@ class CategoryItemsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 }

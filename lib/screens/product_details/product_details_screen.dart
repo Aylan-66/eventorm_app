@@ -1,5 +1,6 @@
 import 'dart:ui';
-
+import 'package:eventorm_app/models/events.dart';
+import 'package:eventorm_app/services/events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eventorm_app/common_widgets/app_button.dart';
@@ -10,89 +11,127 @@ import 'package:eventorm_app/widgets/item_counter_widget.dart';
 import 'favourite_toggle_icon_widget.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final GroceryItem groceryItem;
-  final String heroSuffix;
+  final Event event;
+  final String ?heroSuffix;
 
-  const ProductDetailsScreen(this.groceryItem, {this.heroSuffix});
+  const ProductDetailsScreen(this.event, {this.heroSuffix});
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  int amount = 1;
+  int amount = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            getImageHeaderWidget(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        widget.groceryItem.name,
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: AppText(
-                        text: widget.groceryItem.description,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff7C7C7C),
-                      ),
-                      trailing: FavoriteToggleIcon(),
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        ItemCounterWidget(
-                          onAmountChanged: (newAmount) {
-                            setState(() {
-                              amount = newAmount;
-                            });
-                          },
-                        ),
-                        Spacer(),
-                        Text(
-                          "\$${getTotalPrice().toStringAsFixed(2)}",
+
+
+    child: Column(
+                mainAxisSize: MainAxisSize.min,
+            children: [
+              getImageHeaderWidget(),
+               SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          widget.event.name.toString(),
                           style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          widget.event.description.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff7C7C7C),
                           ),
-                        )
-                      ],
-                    ),
-                    Spacer(),
-                    Divider(thickness: 1),
-                    getProductDataRowWidget("Product Details"),
-                    Divider(thickness: 1),
-                    getProductDataRowWidget("Nutritions",
-                        customWidget: nutritionWidget()),
-                    Divider(thickness: 1),
-                    getProductDataRowWidget(
-                      "Review",
-                      customWidget: ratingWidget(),
-                    ),
-                    Spacer(),
-                    AppButton(
-                      label: "Add To Basket",
-                    ),
-                    Spacer(),
-                  ],
+                        ),
+                        trailing: FavoriteToggleIcon(),
+                      ),
+
+                      Container(
+
+                        child: Column(
+                        children: [
+                          ListView.separated(
+                            physics: new NeverScrollableScrollPhysics(),
+                            itemCount: widget.event.event_tickets.length,
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Text(widget.event.event_tickets[index].name.toString(),
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                                  Row(
+                                    children: [
+                                      ItemCounterWidget(
+                                        onAmountChanged: (newAmount) {
+                                          setState(() {
+                                            amount = newAmount;
+                                          });
+                                        },
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        "\$${widget.event.event_tickets[index].price}",
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return SizedBox(
+                                height: 20,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      ),
+
+                     /*
+                      Divider(thickness: 1),
+                      getProductDataRowWidget("Product Details"),
+                      Divider(thickness: 1),
+                      getProductDataRowWidget("Nutritions",
+                          customWidget: nutritionWidget()),
+                      Divider(thickness: 1),
+                      getProductDataRowWidget(
+                        "Review",
+                        customWidget: ratingWidget(),
+                      ),*/
+
+                      AppButton(
+                        label: "Add To Basket",
+                      ),
+
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+              )
+
+            ],
+      ) ),
+
+
+
+                );
   }
 
   Widget getImageHeaderWidget() {
@@ -116,19 +155,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             stops: [0.0, 1.0],
             tileMode: TileMode.clamp),
       ),
-      child: Hero(
-        tag: "GroceryItem:" +
-            widget.groceryItem.name +
-            "-" +
-            (widget.heroSuffix ?? ""),
-        child: Image(
-          image: AssetImage(widget.groceryItem.imagePath),
-        ),
+      child: Image(
+          image: AssetImage("assets/images/event_images/n_damso.png"),
+
       ),
     );
   }
 
-  Widget getProductDataRowWidget(String label, {Widget customWidget}) {
+  Widget getProductDataRowWidget(String label, {Widget? customWidget}) {
     return Container(
       margin: EdgeInsets.only(
         top: 20,
@@ -136,7 +170,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
       child: Row(
         children: [
-          AppText(text: label, fontWeight: FontWeight.w600, fontSize: 16),
+          Text(
+            label,
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: 16
+            ),
+          ),
           Spacer(),
           if (customWidget != null) ...[
             customWidget,
@@ -160,11 +199,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         color: Color(0xffEBEBEB),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: AppText(
-        text: "100gm",
-        fontWeight: FontWeight.w600,
-        fontSize: 12,
-        color: Color(0xff7C7C7C),
+      child: Text(
+        "100gm",
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+          color: Color(0xff7C7C7C),
+        ),
       ),
     );
   }
@@ -190,6 +231,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   double getTotalPrice() {
-    return amount * widget.groceryItem.price;
+    /*return amount * widget.groceryItem.price!.toDouble();*/
+    return 5;
   }
 }

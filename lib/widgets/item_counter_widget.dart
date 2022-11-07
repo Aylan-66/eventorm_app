@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:eventorm_app/styles/colors.dart';
 
 class ItemCounterWidget extends StatefulWidget {
-  final Function onAmountChanged;
+  final Function? onAmountChanged;
 
-  const ItemCounterWidget({Key key, this.onAmountChanged}) : super(key: key);
+  const ItemCounterWidget({Key? key, this.onAmountChanged}) : super(key: key);
 
   @override
   _ItemCounterWidgetState createState() => _ItemCounterWidgetState();
@@ -49,11 +49,11 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
 
   void updateParent() {
     if (widget.onAmountChanged != null) {
-      widget.onAmountChanged(amount);
+      widget.onAmountChanged!(amount);
     }
   }
 
-  Widget iconWidget(IconData iconData, {Color iconColor, onPressed}) {
+  Widget iconWidget(IconData iconData, {Color? iconColor, onPressed}) {
     return GestureDetector(
       onTap: () {
         if (onPressed != null) {
@@ -81,12 +81,12 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
   }
 
   Widget getText(
-      {String text,
-      double fontSize,
+      {String? text,
+      double? fontSize,
       bool isBold = false,
       color = Colors.black}) {
     return Text(
-      text,
+      text!,
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: isBold ? FontWeight.bold : FontWeight.normal,

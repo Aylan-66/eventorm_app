@@ -23,10 +23,12 @@ class FilterScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: AppText(
-          text: "Filters",
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+        title: Text(
+          "Filters",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Container(
@@ -83,9 +85,9 @@ class FilterScreen extends StatelessWidget {
 }
 
 class OptionItem extends StatefulWidget {
-  final String text;
+  final String? text;
 
-  const OptionItem({Key key, this.text}) : super(key: key);
+  const OptionItem({Key? key, this.text}) : super(key: key);
 
   @override
   _OptionItemState createState() => _OptionItemState();
@@ -118,7 +120,7 @@ class _OptionItemState extends State<OptionItem> {
 
   Widget getTextWidget() {
     return Text(
-      widget.text,
+      widget.text.toString(),
       style: TextStyle(
         color: checked ? AppColors.primaryColor : Colors.black,
         fontSize: 16,

@@ -6,8 +6,8 @@ import 'package:eventorm_app/styles/colors.dart';
 import 'item_counter_widget.dart';
 
 class ChartItemWidget extends StatefulWidget {
-  ChartItemWidget({Key key, this.item}) : super(key: key);
-  final GroceryItem item;
+  ChartItemWidget({Key? key, this.item}) : super(key: key);
+  final GroceryItem? item;
 
   @override
   _ChartItemWidgetState createState() => _ChartItemWidgetState();
@@ -38,19 +38,24 @@ class _ChartItemWidgetState extends State<ChartItemWidget> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppText(
-                  text: widget.item.name,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  widget.item!.name.toString(),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                AppText(
-                    text: widget.item.description,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.darkGrey),
+                Text(
+                  widget.item!.description.toString(),
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkGrey
+                  ),
+                ),
                 SizedBox(
                   height: 12,
                 ),
@@ -95,11 +100,11 @@ class _ChartItemWidgetState extends State<ChartItemWidget> {
   Widget imageWidget() {
     return Container(
       width: 100,
-      child: Image.asset(widget.item.imagePath),
+      child: Image.asset(widget.item!.imagePath.toString()),
     );
   }
 
   double getPrice() {
-    return widget.item.price * amount;
+    return widget.item!.price!.toDouble() * amount;
   }
 }

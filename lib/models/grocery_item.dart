@@ -1,10 +1,10 @@
 class GroceryItem {
-  final int id;
-  final String name;
-  final String artist;
-  final String description;
-  final double price;
-  final String imagePath;
+  final int? id;
+  final String? name;
+  final String? artist;
+  final String? description;
+  final double? price;
+  final String? imagePath;
 
   GroceryItem(
       {this.id, this.name, this.artist, this.description, this.price, this.imagePath});

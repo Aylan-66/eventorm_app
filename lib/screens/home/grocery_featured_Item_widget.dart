@@ -10,8 +10,8 @@ class GroceryFeaturedItem {
 }
 
 var groceryFeaturedItems = [
-  GroceryFeaturedItem("Pulses", "assets/images/pulses.png"),
-  GroceryFeaturedItem("Rise", "assets/images/rise.png"),
+  GroceryFeaturedItem("Rap", "assets/images/rap.png"),
+  GroceryFeaturedItem("Pop", "assets/images/pop.png"),
 ];
 
 class GroceryFeaturedCard extends StatelessWidget {
@@ -38,10 +38,12 @@ class GroceryFeaturedCard extends StatelessWidget {
           SizedBox(
             width: 15,
           ),
-          AppText(
-            text: groceryFeaturedItem.name,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+          Text(
+            groceryFeaturedItem.name,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
           )
         ],
       ),

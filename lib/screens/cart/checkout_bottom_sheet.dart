@@ -24,10 +24,10 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
         children: <Widget>[
           Row(
             children: [
-              AppText(
-                text: "Checkout",
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+              Text(
+                "Checkout",
+               style: TextStyle( fontSize: 24,
+                 fontWeight: FontWeight.w600,),
               ),
               Spacer(),
               GestureDetector(
@@ -90,7 +90,7 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
           style: TextStyle(
             color: Color(0xFF7C7C7C),
             fontSize: 14,
-            fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
+            fontFamily: Theme.of(context).textTheme.bodyText1?.fontFamily,
             fontWeight: FontWeight.w600,
           ),
           children: [
@@ -108,28 +108,28 @@ class _CheckoutBottomSheetState extends State<CheckoutBottomSheet> {
   }
 
   Widget checkoutRow(String label,
-      {String trailingText, Widget trailingWidget}) {
+      {String? trailingText, Widget? trailingWidget}) {
     return Container(
       margin: EdgeInsets.symmetric(
         vertical: 15,
       ),
       child: Row(
         children: [
-          AppText(
-            text: label,
-            fontSize: 18,
-            color: Color(0xFF7C7C7C),
-            fontWeight: FontWeight.w600,
+          Text(
+            label,
+            style: TextStyle(fontSize: 18,
+              color: Color(0xFF7C7C7C),
+              fontWeight: FontWeight.w600,),
           ),
           Spacer(),
-          trailingText == null
+          /*trailingText == null
               ? trailingWidget
               : AppText(
                   text: trailingText,
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
-                ),
+                ),*/
           SizedBox(
             width: 20,
           ),

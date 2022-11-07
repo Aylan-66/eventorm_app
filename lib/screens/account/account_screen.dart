@@ -22,16 +22,17 @@ class AccountScreen extends StatelessWidget {
               ListTile(
                 leading:
                     SizedBox(width: 65, height: 65, child: getImageHeader()),
-                title: AppText(
-                  text: "Mohammed Hashim",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                title: Text(
+                  "Ayoub Fernandes",
+                  style: TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.bold,),
+
                 ),
-                subtitle: AppText(
-                  text: "github.com/mohammedhashim44",
-                  color: Color(0xff7C7C7C),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
+                subtitle: Text(
+                  "Laissez la musique vous guider",
+                  style: TextStyle(color: Color(0xff7C7C7C),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16,),
                 ),
               ),
               Column(
@@ -98,7 +99,7 @@ class AccountScreen extends StatelessWidget {
   }
 
   Widget getImageHeader() {
-    String imagePath = "assets/images/account_image.jpg";
+    String imagePath = "assets/images/yopar.png";
     return CircleAvatar(
       radius: 5.0,
       backgroundImage: AssetImage(imagePath),

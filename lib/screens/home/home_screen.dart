@@ -1,17 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:eventorm_app/models/grocery_item.dart';
 import 'package:eventorm_app/screens/product_details/product_details_screen.dart';
 import 'package:eventorm_app/styles/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eventorm_app/widgets/grocery_item_card_widget.dart';
 import 'package:eventorm_app/widgets/search_bar_widget.dart';
+import 'package:eventorm_app/services/events.dart';
+import 'package:eventorm_app/models/events.dart';
 
 import 'grocery_featured_Item_widget.dart';
 import 'home_banner_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget  {
+
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  Events? eventsConcert;
+  Events? eventsFestival;
+  Events? eventsSoiree;
+  var isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    //fetch data from API
+    getEvents();
+  }
+
+  getEvents() async {
+    //Events? eventreturn;
+    print("sah to sah");
+    print("sah to sah");
+
+    //setState(() async{
+      eventsFestival = await RemoteService().getEvents("festival");
+      eventsSoiree = await RemoteService().getEvents("soiree");
+      eventsConcert = await RemoteService().getEvents("concert");
+    //});
+
+    if (eventsSoiree != null && eventsSoiree != null && eventsSoiree != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+    ///return eventreturn;
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("re");
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -22,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Image.asset('assets/images/Eventorm_logo.png', width: 140,),
+                  Image.asset('assets/images/Eventorm_logo.png', width: 140),
                   SizedBox(
                     height: 5,
                   ),
@@ -37,13 +79,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 25,
                   ),
-                  padded(subTitle("Notre Selection")),
-                  getHorizontalItemSlider(exclusiveOffers),
+                  padded(subTitle("Les concerts")),
+                  getHorizontalItemSlider(eventsConcert),
                   SizedBox(
                     height: 15,
                   ),
-                  padded(subTitle("Meilleurs ventes")),
-                  getHorizontalItemSlider(bestSelling),
+                  padded(subTitle("Les festivals")),
+                  getHorizontalItemSlider(eventsFestival),
                   SizedBox(
                     height: 15,
                   ),
@@ -80,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  getHorizontalItemSlider(groceries),
+                  getHorizontalItemSlider(eventsSoiree),
                   SizedBox(
                     height: 15,
                   ),
@@ -100,40 +142,50 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget getHorizontalItemSlider(List<GroceryItem> items) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      height: 250,
-      child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              onItemClicked(context, items[index]);
+  Widget getHorizontalItemSlider(Events? eventsfront) {
+    print(eventsfront?.data.events.first.name);
+    return Visibility(
+        visible: isLoaded,
+        replacement: const Center(
+          child: CircularProgressIndicator(),
+        ),
+        child:Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          height: 250,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            itemCount: eventsfront?.data.events.length ?? 0,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  onItemClicked(context, eventsfront!.data.events[index]);
+                  print("salout");
+                },
+                child: GroceryItemCardWidget(
+                  event: eventsfront!.data.events[index],
+                  heroSuffix: "home_screena",
+                ),
+              );
             },
-            child: GroceryItemCardWidget(
-              item: items[index],
-              heroSuffix: "home_screen",
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            width: 20,
-          );
-        },
-      ),
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                width: 20,
+              );
+            },
+          ),
+        )
     );
+
+
   }
 
-  void onItemClicked(BuildContext context, GroceryItem groceryItem) {
+  void onItemClicked(BuildContext context, Event event) {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ProductDetailsScreen(
-                groceryItem,
+                event,
                 heroSuffix: "home_screen",
               )),
     );

@@ -3,9 +3,9 @@ import 'package:eventorm_app/common_widgets/app_text.dart';
 import 'package:eventorm_app/models/category_item.dart';
 
 class CategoryItemCardWidget extends StatelessWidget {
-  CategoryItemCardWidget({Key key, this.item, this.color = Colors.blue})
+  CategoryItemCardWidget({Key? key, this.item, this.color = Colors.blue})
       : super(key: key);
-  final CategoryItem item;
+  final CategoryItem? item;
 
   final height = 200.0;
 
@@ -38,12 +38,14 @@ class CategoryItemCardWidget extends StatelessWidget {
           SizedBox(
             height: 60,
             child: Center(
-              child: AppText(
-                text: item.name,
-                textAlign: TextAlign.center,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              child: Text(
+                  item!.name.toString(),
+                  style: TextStyle(
+                   /* textAlign: TextAlign.center,*/
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
             ),
           ),
         ],
@@ -54,7 +56,7 @@ class CategoryItemCardWidget extends StatelessWidget {
   Widget imageWidget() {
     return Container(
       child: Image.asset(
-        item.imagePath,
+        item!.imagePath,
         fit: BoxFit.contain,
       ),
     );

@@ -49,19 +49,23 @@ class OrderFailedDialogue extends StatelessWidget {
             Spacer(
               flex: 5,
             ),
-            AppText(
-              text: "Oops! Order Failed",
-              fontSize: 28,
-              fontWeight: FontWeight.w600,
+            Text(
+              "Oops! Order Failed",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             Spacer(
               flex: 2,
             ),
-            AppText(
-              text: "Something went temply wrong",
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Color(0xff7C7C7C),
+            Text(
+              "Something went temply wrong",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff7C7C7C),
+              ),
             ),
             Spacer(
               flex: 8,
@@ -84,10 +88,12 @@ class OrderFailedDialogue extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: AppText(
-                text: "Back To Home",
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+              child: Text(
+                "Back To Home",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Spacer(

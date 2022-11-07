@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:eventorm_app/styles/colors.dart';
 
 class AppButton extends StatelessWidget {
-  final String label;
-  final double roundness;
-  final FontWeight fontWeight;
-  final EdgeInsets padding;
-  final Widget trailingWidget;
-  final Function onPressed;
+  final String? label;
+  final double? roundness;
+  final FontWeight? fontWeight;
+  final EdgeInsets? padding;
+  final Widget? trailingWidget;
+  final Function? onPressed;
 
   const AppButton({
-    Key key,
+    Key? key,
     this.label,
     this.roundness = 18,
     this.fontWeight = FontWeight.bold,
@@ -37,7 +37,7 @@ class AppButton extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Text(
-                label,
+                label!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -49,12 +49,12 @@ class AppButton extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 25,
-                child: trailingWidget,
+                child: trailingWidget!,
               )
           ],
         ),
         onPressed: () {
-          if (onPressed != null) onPressed();
+          if (onPressed != null) onPressed!();
         },
       ),
     );

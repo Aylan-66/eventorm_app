@@ -42,10 +42,12 @@ class ExploreScreen extends StatelessWidget {
           height: 20,
         ),
         Center(
-          child: AppText(
-            text: "Find Products",
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+          child: Text(
+            "Find Products",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         SizedBox(
@@ -60,14 +62,15 @@ class ExploreScreen extends StatelessWidget {
   }
 
   Widget getStaggeredGridView(BuildContext context) {
-    return StaggeredGridView.count(
+    return StaggeredGrid.count(
       crossAxisCount: 4,
       children: categoryItemsDemo.asMap().entries.map<Widget>((e) {
         int index = e.key;
         CategoryItem categoryItem = e.value;
         return GestureDetector(
           onTap: () {
-            onCategoryItemClicked(context, categoryItem);
+            /*onCategoryItemClicked(context, categoryItem);*/
+            "abrt";
           },
           child: Container(
             padding: EdgeInsets.all(10),
@@ -80,9 +83,9 @@ class ExploreScreen extends StatelessWidget {
       }).toList(),
 
       //Here is the place that we are getting flexible/ dynamic card for various images
-      staggeredTiles: categoryItemsDemo
+      /*staggeredTiles: categoryItemsDemo
           .map<StaggeredTile>((_) => StaggeredTile.fit(2))
-          .toList(),
+          .toList(),*/
       mainAxisSpacing: 3.0,
       crossAxisSpacing: 4.0, // add some space
     );

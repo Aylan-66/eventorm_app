@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Spacer(),
-                icon(),
+               /* icon(),*/
                 SizedBox(
                   height: 20,
                 ),
@@ -47,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ));
   }
-
+/*
   Widget icon() {
     String iconPath = "assets/icons/app_icon.svg";
     return SvgPicture.asset(
@@ -55,39 +55,45 @@ class WelcomeScreen extends StatelessWidget {
       width: 48,
       height: 56,
     );
-  }
+  }*/
 
   Widget welcomeTextWidget() {
     return Column(
       children: [
-        AppText(
-          text: "Welcome",
-          fontSize: 48,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+        Text(
+          "Bienvenue",
+          style: TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
         ),
-        AppText(
-          text: "to our store",
-          fontSize: 48,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+        Text(
+          "sur EVENTORM",
+          style: TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
         ),
       ],
     );
   }
 
   Widget sloganText() {
-    return AppText(
-      text: "Get your grecories as fast as in hour",
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: Color(0xffFCFCFC).withOpacity(0.7),
+    return Text(
+      "Decouvrez de nouveau artistes en live!",
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Color(0xffFCFCFC).withOpacity(0.7),
+      ),
     );
   }
 
   Widget getButton(BuildContext context) {
     return AppButton(
-      label: "Get Started",
+      label: "Commencer",
       fontWeight: FontWeight.w600,
       padding: EdgeInsets.symmetric(vertical: 25),
       onPressed: () {
