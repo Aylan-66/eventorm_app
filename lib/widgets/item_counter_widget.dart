@@ -11,7 +11,7 @@ class ItemCounterWidget extends StatefulWidget {
 }
 
 class _ItemCounterWidgetState extends State<ItemCounterWidget> {
-  int amount = 1;
+  int amount = 0;
 
   @override
   Widget build(BuildContext context) {

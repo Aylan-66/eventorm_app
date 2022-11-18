@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getEvents() async {
     //Events? eventreturn;
-    print("sah to sah");
-    print("sah to sah");
 
     //setState(() async{
       eventsFestival = await RemoteService().getEvents("festival");
       eventsSoiree = await RemoteService().getEvents("soiree");
       eventsConcert = await RemoteService().getEvents("concert");
+
+
     //});
 
     if (eventsSoiree != null && eventsSoiree != null && eventsSoiree != null) {
@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("re");
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -143,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget getHorizontalItemSlider(Events? eventsfront) {
-    print(eventsfront?.data.events.first.name);
+
     return Visibility(
         visible: isLoaded,
         replacement: const Center(
@@ -157,10 +156,10 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: eventsfront?.data.events.length ?? 0,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
+              print(eventsfront!.data.events[index]);
               return GestureDetector(
                 onTap: () {
                   onItemClicked(context, eventsfront!.data.events[index]);
-                  print("salout");
                 },
                 child: GroceryItemCardWidget(
                   event: eventsfront!.data.events[index],

@@ -65,7 +65,6 @@ class CategoryItemsScreen extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               /*onItemClicked(context, groceryItem);*/
-              print("miteux");
             },
             child: Container(
               padding: EdgeInsets.all(10),

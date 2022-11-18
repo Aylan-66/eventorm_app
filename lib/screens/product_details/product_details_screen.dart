@@ -1,11 +1,13 @@
 import 'dart:ui';
+import 'dart:convert';
 import 'package:eventorm_app/models/events.dart';
 import 'package:eventorm_app/services/events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eventorm_app/common_widgets/app_button.dart';
 import 'package:eventorm_app/common_widgets/app_text.dart';
-import 'package:eventorm_app/models/grocery_item.dart';
+import 'package:eventorm_app/models/cart.dart';
+import 'package:eventorm_app/services/cart.dart';
 import 'package:eventorm_app/widgets/item_counter_widget.dart';
 
 import 'favourite_toggle_icon_widget.dart';
@@ -22,7 +24,29 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int amount = 0;
+  var productplace = {{}};
+  var pro = {};
+  Cart? cart;
 
+  @override
+  void initState() {
+    super.initState();
+    //fetch data from API
+    setCart();
+  }
+
+  setCart() async {
+    setState(() {
+      for(var i = 0; i < widget.event.event_tickets.length; i++) {
+        pro[i] =
+        {
+          "event_id": widget.event.id,
+          "ticket_name": widget.event.event_tickets[i].name.toString(),
+          "ticket_qty": 0,
+        };
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +103,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         onAmountChanged: (newAmount) {
                                           setState(() {
                                             amount = newAmount;
+                                            pro[index]["ticket_qty"] = newAmount;
                                           });
                                         },
                                       ),
@@ -118,7 +143,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),*/
 
                       AppButton(
-                        label: "Add To Basket",
+                        label: "Ajouter au panier",
+                        onPressed: () async {
+
+                         // cart = Cart.fromMap(
+                         //     json.decode('{"event_id" : ' + widget.event.id.toString() + '}'));
+                          //print(cart!.toMap());
+
+                          await DatabaseHelper.instance.MultipleAdd(pro);
+                          var niktamere = await DatabaseHelper.instance.getGroceries();
+                          print("pine");
+                        },
                       ),
 
                     ],

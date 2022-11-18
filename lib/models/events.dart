@@ -4,6 +4,10 @@ Events eventsFromJson(String str) => Events.fromJson(json.decode(str));
 
 String eventsToJson(Events data) => json.encode(data.toJson());
 
+EventSingle eventFromJson(String str) => EventSingle.fromJson(json.decode(str));
+
+String eventToJson(Event data) => json.encode(data.toJson());
+
 class Events {
   Events({
     required this.status,
@@ -37,6 +41,42 @@ class Data {
 
   Map<String, dynamic> toJson() => {
     "events": List<dynamic>.from(events.map((x) => x.toJson())),
+  };
+}
+
+class EventSingle {
+  EventSingle({
+    required this.status,
+    required this.data,
+  });
+
+  String status;
+  DataSingle data;
+
+  factory EventSingle.fromJson(Map<String, dynamic> json) => EventSingle(
+    status: json["status"],
+    data: DataSingle.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "data": data.toJson(),
+  };
+}
+
+class DataSingle {
+  DataSingle({
+    required this.event,
+  });
+
+  Event event;
+
+  factory DataSingle.fromJson(Map<String, dynamic> json) => DataSingle(
+    event: Event.fromJson(json["event"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "event": event.toJson()
   };
 }
 
