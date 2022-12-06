@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:eventorm_app/models/user.dart';
+import 'package:eventorm_app/services/user.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:eventorm_app/common_widgets/app_text.dart';
@@ -19,89 +21,296 @@ class registerScreenState extends State<registerScreen> {
 
   var formkey;
   final _formKey = GlobalKey<FormState>();
-  final myController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  User? user;
+  bool _passwordVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _passwordVisible = false;
     //fetch data from API
-    postUser();
   }
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController.dispose();
+    firstnameController.dispose();
+    lastnameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+
     super.dispose();
   }
 
-  postUser() async{
-    print(myController.text);
+  postUserEn() async{
+
+    print(userToJson( User(
+        firstname: firstnameController.text,
+        lastname: lastnameController.text,
+        email: emailController.text,
+        password: passwordController.text
+    ))
+
+
+    );
+    await RemoteServiceU().postUser(userToJson( User(
+        firstname: firstnameController.text,
+        lastname: lastnameController.text,
+        email: emailController.text,
+        password: passwordController.text
+    )));
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: 'Enter name',
-              labelText: "sah",
-            ),
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: BackButton(color: Colors.black),
+          centerTitle: true,
+          elevation: 0,
+          title: Text("Sign Up",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black)
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: 'Enter name',
-              labelText: "sah",
-            ),
-          ),
-          TextFormField(
-            controller: myController,
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: 'Enter name',
-              labelText: "sah",
-            ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: 'Enter name',
-              labelText: "sah",
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 150, top: 40),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red, // background
-                onPrimary: Colors.white, // foreground
+          bottom: PreferredSize(
+              child: Container(
+                color: Colors.grey,
+                height: 1,
               ),
-              onPressed: () {
-                postUser();
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text(
-                            "oe"
-                        )
-                    ),
-                  );
-                }
-              },
-              child: Text('ElevatedButton with custom foreground/background'),
-            )
+              preferredSize: Size.fromHeight(7.0)),
+        ),
+        body: SafeArea(
+        child: SingleChildScrollView(
+        child: Column(
+        children: [
+        SizedBox(
+        height: 40,
+    ),
+    SizedBox(
+    height: 20,
+    ),
+    Container(
+      padding: EdgeInsets.all(20),
+      child: Column(
+          children: [
 
-          )
-        ],
+
+            Form(
+              key: _formKey,
+              child: Column(
+
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    controller: firstnameController,
+                    decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(
+                        Icons.person,
+                        color: AppColors.primaryColor,
+                      ),
+                      hintText: 'Enter firstname',
+                      labelText: "Firstname",
+                      floatingLabelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: lastnameController,
+                    decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(
+                        Icons.person,
+                        color: AppColors.primaryColor,
+                      ),
+                      hintText: 'Enter lastname',
+                      labelText: "Lastname",
+                      floatingLabelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(
+                        Icons.mail,
+                        color: AppColors.primaryColor,
+                      ),
+                      hintText: 'Enter email',
+                      labelText: "Email",
+                      floatingLabelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: !_passwordVisible,
+                    decoration: InputDecoration(
+                      focusColor: AppColors.primaryColor,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(
+                        Icons.password,
+                        color: AppColors.primaryColor,
+                      ),
+                      hintText: 'Enter password',
+                      labelText: "Password",
+                      floatingLabelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+
+                      ),
+                      labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          // Update the state i.e. toogle the state of passwordVisible variable
+                          setState(() {
+                            _passwordVisible = !_passwordVisible;
+                          });
+                        },
+                      ),
+
+                    ),
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(left: 240, top: 40),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryColor// foreground
+                          ),
+                          onPressed: () {
+
+                            if (_formKey.currentState!.validate()) {
+                              postUserEn();
+                              // If the form is valid, display a snackbar. In the real world,
+                              // you'd often call a server or save the information in a database.
+                              ScaffoldMessenger.of(context).showSnackBar(
+
+                                const SnackBar(
+                                    content: Text(
+                                        "Sending Data"
+                                    )
+                                ),
+                              );
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: SvgPicture.asset(
+                                  "assets/icons/account_icons/logout_icon.svg",
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                "   Submit",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              Container()
+                            ],
+                          )
+                      )
+
+                  )
+                ],
+              ),
+            ),
+          ]
       ),
+    ),
+
+        ]
+        )
+    )
+        )
     );
+
   }
 }

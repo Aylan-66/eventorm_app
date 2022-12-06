@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:eventorm_app/screens/product_details/product_details_screen.dart';
 import 'package:eventorm_app/styles/colors.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eventorm_app/widgets/grocery_item_card_widget.dart';
 import 'package:eventorm_app/widgets/search_bar_widget.dart';
 import 'package:eventorm_app/services/events.dart';
+import 'package:eventorm_app/services/user.dart';
 import 'package:eventorm_app/models/events.dart';
 
 import 'grocery_featured_Item_widget.dart';
@@ -33,22 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getEvents() async {
-    //Events? eventreturn;
 
-    //setState(() async{
-      eventsFestival = await RemoteService().getEvents("festival");
-      eventsSoiree = await RemoteService().getEvents("soiree");
-      eventsConcert = await RemoteService().getEvents("concert");
-
-
-    //});
+    eventsFestival = await RemoteService().getEvents("festival");
+    eventsSoiree = await RemoteService().getEvents("soiree");
+    eventsConcert = await RemoteService().getEvents("concert");
 
     if (eventsSoiree != null && eventsSoiree != null && eventsSoiree != null) {
       setState(() {
         isLoaded = true;
       });
     }
-    ///return eventreturn;
+
   }
 
   @override

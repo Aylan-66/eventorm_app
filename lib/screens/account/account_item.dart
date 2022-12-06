@@ -5,6 +5,13 @@ class AccountItem {
   AccountItem(this.label, this.iconPath);
 }
 
+class AccountItemLogout {
+  final String label;
+  final String iconPath;
+
+  AccountItemLogout(this.label, this.iconPath);
+}
+
 List<AccountItem> accountItems = [
   AccountItem("Mes commandes", "assets/icons/account_icons/orders_icon.svg"),
   AccountItem("My Details", "assets/icons/account_icons/details_icon.svg"),
@@ -16,4 +23,9 @@ List<AccountItem> accountItems = [
       "Notifications", "assets/icons/account_icons/notification_icon.svg"),
   AccountItem("Help", "assets/icons/account_icons/help_icon.svg"),
   AccountItem("About", "assets/icons/account_icons/about_icon.svg"),
+];
+
+List<AccountItemLogout> accountItemsLogout = [
+  AccountItemLogout("Help", "assets/icons/account_icons/help_icon.svg"),
+  AccountItemLogout("About", "assets/icons/account_icons/about_icon.svg"),
 ];

@@ -10,14 +10,14 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   User({
-    required this.firstname,
-    required this.lastname,
+    this.firstname,
+    this.lastname,
     required this.email,
     required this.password,
   });
 
-  String firstname;
-  String lastname;
+  String? firstname;
+  String? lastname;
   String email;
   String password;
 
@@ -32,6 +32,6 @@ class User {
     "firstname": firstname,
     "lastname": lastname,
     "email": email,
-    "password_digest": password,
+    "password": password,
   };
 }
